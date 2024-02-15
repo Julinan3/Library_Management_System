@@ -451,11 +451,11 @@ class UserInterface
         library.ClearConsole();
 
         Console.WriteLine("          ---------------------------------------------------\n");
-        Console.WriteLine("                     1) Viewing Book List\n");
-        Console.WriteLine("                     2) Searching the Book From List\n");
-        Console.WriteLine("                     3) Adding a Book to the Database\n");
-        Console.WriteLine("                     4) Book Borrowing\n");
-        Console.WriteLine("                     5) Returning a Book\n");
+        Console.WriteLine("                     1) Book List\n");
+        Console.WriteLine("                     2) Book Search\n");
+        Console.WriteLine("                     3) Add Book\n");
+        Console.WriteLine("                     4) Borrow Book\n");
+        Console.WriteLine("                     5) Return Book\n");
         Console.WriteLine("                     0) Exit\n");
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.WriteLine("                     9) Delete Data!!!\n");
