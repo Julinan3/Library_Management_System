@@ -87,27 +87,27 @@ class Library
         {
             Console.WriteLine("          ---------------------------------------------------\n");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("          Veri tabanına ekli kitap bulunmamaktadır !\n          Ana menü/Veri Tabanına Kitap Ekleme kısmından ekleyiniz. ");
+            Console.WriteLine("          No books attached to the database !\n          Add from the main menu/Add Book to Database. ");
             Console.ResetColor();
-            Console.WriteLine("            0) Ana Menüye Dön");
+            Console.WriteLine("            0) Return to Main Menu");
 
             BackMainMenu();
         }
         else//Eğer varsa kitapları listeler.
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("          Kitapların Listesi:\n");
+            Console.WriteLine("          List of Books:\n");
             Console.ResetColor();
             foreach (var book in Books)
             {
-                Console.WriteLine("             Kitap Adı: " + book.Name);
-                Console.WriteLine("             Kitap Yazarı: " + book.Author);
-                Console.WriteLine("             Kitap ISBN Numarası: " + book.ISBN_Number);
-                Console.WriteLine("             Kitap Kopya Sayısı: " + book.Copy_Number);
-                Console.WriteLine("             Kitap Ödünç Alınma Sayısı: " + book.Borrow_Number);
+                Console.WriteLine("             Book Title: " + book.Name);
+                Console.WriteLine("             Book Author: " + book.Author);
+                Console.WriteLine("             Book ISBN Number: " + book.ISBN_Number);
+                Console.WriteLine("             Book Copy Number: " + book.Copy_Number);
+                Console.WriteLine("             Number of Books Borrowed: " + book.Borrow_Number);
                 Console.WriteLine("          ---------------------------------------------------\n");
             }
-            Console.WriteLine("            0) Ana Menüye Dön");
+            Console.WriteLine("            0) Return to Main Menu");
 
             BackMainMenu();
         }
@@ -120,7 +120,7 @@ class Library
         ClearConsole();
 
         Console.WriteLine("          ---------------------------------------------------\n");
-        Console.WriteLine("          Aramak istediğiniz kitabın adını veya yazarını giriniz: ");
+        Console.WriteLine("          Enter the title or author of the book you want to search for: ");
 
         string? BookNameOrAuthor = Console.ReadLine();
 
@@ -128,15 +128,15 @@ class Library
         {
             if(book.Name == BookNameOrAuthor || book.Author == BookNameOrAuthor)
             {
-                Console.WriteLine("             Kitap Adı: " + book.Name);
-                Console.WriteLine("             Kitap Yazarı: " + book.Author);
-                Console.WriteLine("             Kitap ISBN Numarası: " + book.ISBN_Number);
-                Console.WriteLine("             Kitap Kopya Sayısı: " + book.Copy_Number);
-                Console.WriteLine("             Kitap Ödünç Alınma Sayısı: " + book.Borrow_Number);
+                Console.WriteLine("             Book Title: " + book.Name);
+                Console.WriteLine("             Book Author: " + book.Author);
+                Console.WriteLine("             Book ISBN Number: " + book.ISBN_Number);
+                Console.WriteLine("             Book Copy Number: " + book.Copy_Number);
+                Console.WriteLine("             Number of Books Borrowed: " + book.Borrow_Number);
                 Console.WriteLine("          ---------------------------------------------------\n");
             }
         }
-        Console.WriteLine("            0) Ana Menüye Dön    1) Tekrar Ara");
+        Console.WriteLine("            0) Return to Main Menu    1) Search Again");
 
         //0 veya  1 seçilmesi durumunda neler olucağını seçen kısım.
         string? Selected_MenuNumber = Console.ReadLine();
@@ -160,14 +160,14 @@ class Library
         ClearConsole();
 
         Console.WriteLine("          ---------------------------------------------------\n");
-        Console.WriteLine("          Eklemek istediğiniz kitabın adı: ");
+        Console.WriteLine("          Name of the book you want to add: ");
         string? Entered_Name = Console.ReadLine();
-        Console.WriteLine("          Eklemek istediğiniz kitabın yazarı: ");
+        Console.WriteLine("          Author of the book you want to add: ");
         string? Entered_Author = Console.ReadLine();
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("          ISBN numarası sayılardan oluşmalıdır.\n          13 basamaklı olmalıdır.\n          Veri sisteminde zaten bulunan bir ISBN numarası girilmemelidir.\n");
+        Console.WriteLine("          ISBN number must consist of numbers.\n          Must be 13 digits.\n          An ISBN number already in the database should not be entered.\n");
         Console.ResetColor();
-        Console.WriteLine("          Eklemek istediğiniz kitabın ISBN numarası: ");
+        Console.WriteLine("          ISBN number of the book you want to add: ");
         string? Entered_ISBN_Number = Console.ReadLine();
         //Girilen ISBN numarasının uygunluğu için uzun kontrol ifleri.
         if (long.TryParse(Entered_ISBN_Number,out long result) == false)
@@ -175,9 +175,9 @@ class Library
             while(long.TryParse(Entered_ISBN_Number, out long result2) == false)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("          ISBN numarası sadece sayılardan oluşmalıdır");
+                Console.WriteLine("          ISBN number must consist of numbers only");
                 Console.ResetColor();
-                Console.WriteLine("          Eklemek istediğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                Console.WriteLine("          Enter the ISBN number of the book you want to add again: ");
                 Entered_ISBN_Number = Console.ReadLine();
             }   
         }
@@ -186,9 +186,9 @@ class Library
             while(Entered_ISBN_Number.Length < 13 || Entered_ISBN_Number.Length > 13)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("          ISBN numarası 13 basamaktan oluşmalıdır");
+                Console.WriteLine("          ISBN number must consist of 13 digits");
                 Console.ResetColor();
-                Console.WriteLine("          Eklemek istediğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                Console.WriteLine("          Enter the ISBN number of the book you want to add again: ");
                 Entered_ISBN_Number = Console.ReadLine();
             }
         }
@@ -199,9 +199,9 @@ class Library
                 if (book.ISBN_Number == Entered_ISBN_Number)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("          Eklemek istediğiniz kitabın ISBN numarası daha önce kullanılmış");
+                    Console.WriteLine("          The ISBN number of the book you want to add has been used before");
                     Console.ResetColor();
-                    Console.WriteLine("          Eklemek istediğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                    Console.WriteLine("          Enter the ISBN number of the book you want to add again: ");
                     Entered_ISBN_Number = Console.ReadLine();
                     if(book.ISBN_Number == Entered_ISBN_Number) 
                     {
@@ -211,12 +211,12 @@ class Library
             }
         }
 
-        Console.WriteLine("          Eklemek istediğiniz kitabın bulunucak kopya sayısı: ");
+        Console.WriteLine("          Number of copies of the book you want to add: ");
         string? Entered_Copy_Number = Console.ReadLine();
-        Console.WriteLine("          Kitap veritabanına eklendi!");
+        Console.WriteLine("          Book added to the database!");
         Console.WriteLine("          ---------------------------------------------------\n");
         Books.Add(new Book(Entered_Name, Entered_Author, Entered_ISBN_Number, Convert.ToInt32(Entered_Copy_Number)));
-        Console.WriteLine("            0) Ana Menüye Dön");
+        Console.WriteLine("            0) Return to Main Menu");
 
         SaveBooks();
 
@@ -230,10 +230,10 @@ class Library
 
         Console.WriteLine("          ---------------------------------------------------\n");
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("          Şuanda 0 yazarak işleme başlamadan ana menüye dönebilirsiniz.");
+        Console.WriteLine("          You can return to the main menu without starting the process by typing 0.");
         Console.ResetColor();
-        Console.WriteLine("          Ödünç aldığınız bir kitabı 5 gün içinde iade etmelisiniz.");
-        Console.WriteLine("          Ödünç almak istediğiniz kitabın ISBN numarasını giriniz: ");
+        Console.WriteLine("          Return a borrowed book within 5 days.");
+        Console.WriteLine("          Enter the ISBN number of the book you want to borrow: ");
         //ISBN hatırlanmadığı durumda ana menüye dönme fırsatı verir.
         string? Entered_ISBN_Number = Console.ReadLine();
         if(Entered_ISBN_Number == "0")
@@ -247,9 +247,9 @@ class Library
                 while (long.TryParse(Entered_ISBN_Number, out long result2) == false)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("          ISBN numarası sadece sayılardan oluşmalıdır");
+                    Console.WriteLine("          ISBN number must consist of numbers only");
                     Console.ResetColor();
-                    Console.WriteLine("          Ödünç almak istediğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                    Console.WriteLine("          Enter the ISBN number of the book you want to add again: ");
                     Entered_ISBN_Number = Console.ReadLine();
                 }
             }
@@ -258,9 +258,9 @@ class Library
                 while (Entered_ISBN_Number.Length < 13 || Entered_ISBN_Number.Length > 13)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("          ISBN numarası 13 basamaktan oluşmalıdır");
+                    Console.WriteLine("          ISBN number must consist of 13 digits");
                     Console.ResetColor();
-                    Console.WriteLine("          Ödünç almak istediğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                    Console.WriteLine("          Enter the ISBN number of the book you want to add again: ");
                     Entered_ISBN_Number = Console.ReadLine();
                 }
             }
@@ -273,10 +273,10 @@ class Library
                         if (book.Copy_Number <= 0)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("          Ödünç alınabilicek kitap kopyası yok.");
+                            Console.WriteLine("          There are no copies of books to borrow!");
                             Console.ResetColor();
                             Console.WriteLine("          ---------------------------------------------------\n");
-                            Console.WriteLine("            0) Ana Menüye Dön    1) Tekrar Ödünç Alma Yap");
+                            Console.WriteLine("            0) Return to Main Menu    1) Make Borrowing Again");
 
                             string? Selected_MenuNumber = Console.ReadLine();
                             int ConvertedMenuNumber = Convert.ToInt32(Selected_MenuNumber);
@@ -295,10 +295,10 @@ class Library
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("          Kitap ödünç alındı!");
+                            Console.WriteLine("          The book is borrowed!");
                             Console.ResetColor();
                             Console.WriteLine("          ---------------------------------------------------\n");
-                            Console.WriteLine("            0) Ana Menüye Dön");
+                            Console.WriteLine("            0) Return to Main Menu");
 
                             //Bir kitabın kopyalarını bitene kadar ödünç alabiliriz ama alım tarihi ilk kopyanın tarihi olur.
                             //Ve iade tarihi ilk alınan kopyadan hesaplanır.
@@ -324,7 +324,7 @@ class Library
         LoadBooks();
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("          Ödünç Aldığın Kitapların Listesi:\n");
+        Console.WriteLine("          List of Borrowed Books:\n");
         Console.ResetColor();
         foreach (var book in Books)
         {
@@ -333,17 +333,17 @@ class Library
             {
                 for (int i = 1; i <= book.Borrow_Number; i++)
                 {
-                    Console.WriteLine("             Kitap Adı: " + book.Name);
-                    Console.WriteLine("             Kitap Yazarı: " + book.Author);
-                    Console.WriteLine("             Kitap ISBN Numarası: " + book.ISBN_Number);
-                    Console.WriteLine("             Ödünç Alınma Tarihi " + book.Borrow_Date.ToShortDateString());
-                    Console.WriteLine("             İade Edilme Tarihi " + book.Due_Date.ToShortDateString());
+                    Console.WriteLine("             Book Title: " + book.Name);
+                    Console.WriteLine("             Book Author: " + book.Author);
+                    Console.WriteLine("             Book ISBN Number: " + book.ISBN_Number);
+                    Console.WriteLine("             Date Borrowed " + book.Borrow_Date.ToShortDateString());
+                    Console.WriteLine("             Return Date " + book.Due_Date.ToShortDateString());
                     Console.WriteLine("          ---------------------------------------------------\n");
                 }
             }
         }
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("          İade Süresi Dolmuş Kitapların Listesi:\n");
+        Console.WriteLine("          List of Books with Expired Return Deadline:\n");
         Console.ResetColor();
         foreach (var book in Books)
         {   //İade süresi dolmuş kitaplar ayrı listelenir.
@@ -351,20 +351,20 @@ class Library
             {
                 for (int i = 1; i <= book.Borrow_Number; i++)
                 {
-                    Console.WriteLine("             Kitap Adı: " + book.Name);
-                    Console.WriteLine("             Kitap Yazarı: " + book.Author);
-                    Console.WriteLine("             Kitap ISBN Numarası: " + book.ISBN_Number);
-                    Console.WriteLine("             Ödünç Alınma Tarihi " + book.Borrow_Date.ToShortDateString());
-                    Console.WriteLine("             İade Edilme Tarihi " + book.Due_Date.ToShortDateString());
+                    Console.WriteLine("             Book Title: " + book.Name);
+                    Console.WriteLine("             Book Author: " + book.Author);
+                    Console.WriteLine("             Book ISBN Number: " + book.ISBN_Number);
+                    Console.WriteLine("             Date Borrowed " + book.Borrow_Date.ToShortDateString());
+                    Console.WriteLine("             Return Date " + book.Due_Date.ToShortDateString());
                     Console.WriteLine("          ---------------------------------------------------\n");
                 }
             }
         }
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("          Şuanda 0 yazarak işleme başlamadan ana menüye dönebilirsiniz.");
-        Console.WriteLine("          Ödünç aldığınız iade süresi dolmuş/dolmamış kitapların listesi yukardadır.");
+        Console.WriteLine("          You can return to the main menu without starting the process by typing 0.");
+        Console.WriteLine("          The list of books you have borrowed that have expired/not expired is above.");
         Console.ResetColor();
-        Console.WriteLine("          İade ediceğiniz kitabın ISBN numarasını giriniz: ");
+        Console.WriteLine("          Enter the ISBN number of the book you are returning: ");
         string? Entered_ISBN_Number = Console.ReadLine();
         //ISBN hatırlanmadığı durumda ana menüye dönme fırsatı verir.
         if (Entered_ISBN_Number == "0")
@@ -378,9 +378,9 @@ class Library
                 while (long.TryParse(Entered_ISBN_Number, out long result2) == false)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("          ISBN numarası sadece sayılardan oluşmalıdır");
+                    Console.WriteLine("          ISBN number must consist of numbers only");
                     Console.ResetColor();
-                    Console.WriteLine("          İade ediceğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                    Console.WriteLine("          Enter the ISBN number of the book you want to return again: ");
                     Entered_ISBN_Number = Console.ReadLine();
                 }
             }
@@ -389,9 +389,9 @@ class Library
                 while (Entered_ISBN_Number.Length < 13 || Entered_ISBN_Number.Length > 13)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("          ISBN numarası 13 basamaktan oluşmalıdır");
+                    Console.WriteLine("          ISBN number must consist of 13 digits");
                     Console.ResetColor();
-                    Console.WriteLine("          İade ediceğiniz kitabın ISBN numarasını tekrar giriniz: ");
+                    Console.WriteLine("          Enter the ISBN number of the book you want to return again: ");
                     Entered_ISBN_Number = Console.ReadLine();
                 }
             }
@@ -402,10 +402,10 @@ class Library
                     if (book.ISBN_Number == Entered_ISBN_Number && book.IsBorrowed)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("          Kitabınız İade Edildi.");
+                        Console.WriteLine("          Your book has been returned.");
                         Console.ResetColor();
                         Console.WriteLine("          ---------------------------------------------------\n");
-                        Console.WriteLine("            0) Ana Menüye Dön    1) Tekrar İade Etme Yap");
+                        Console.WriteLine("            0) Return to Main Menu    1) Make a Return Again");
 
                         book.Borrow_Number--;
                         book.Copy_Number++;
@@ -451,21 +451,21 @@ class UserInterface
         library.ClearConsole();
 
         Console.WriteLine("          ---------------------------------------------------\n");
-        Console.WriteLine("                     1) Kitap Listesi Görüntüleme\n");
-        Console.WriteLine("                     2) Kitap Listesinde Arama Yapma\n");
-        Console.WriteLine("                     3) Veri Tabanına Kitap Ekleme\n");
-        Console.WriteLine("                     4) Kitap Ödünç Alma\n");
-        Console.WriteLine("                     5) Kitap İade Etme\n");
-        Console.WriteLine("                     0) Çıkış Yapma\n");
+        Console.WriteLine("                     1) Viewing Book List\n");
+        Console.WriteLine("                     2) Searching the Book From List\n");
+        Console.WriteLine("                     3) Adding a Book to the Database\n");
+        Console.WriteLine("                     4) Book Borrowing\n");
+        Console.WriteLine("                     5) Returning a Book\n");
+        Console.WriteLine("                     0) Exit\n");
         Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine("                     9) Verileri Sil!!!\n");
+        Console.WriteLine("                     9) Delete Data!!!\n");
         Console.ResetColor();
         Console.WriteLine("          ---------------------------------------------------\n");
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("            Menüyü 0,1,2,3,4,5 tuşları ile kullanabilirsiniz");
+        Console.WriteLine("            You can use the menu with 0,1,2,3,4,5 buttons");
         Console.ForegroundColor = ConsoleColor.DarkRed;
         //Verileri silmenin bir yoluda proje dosyaları içerisinde LibraryManagementSystem\bin\Books.txt dosyasını silmektir.
-        Console.WriteLine("            9 numaralı tuş ile verileri silebilirsiniz");
+        Console.WriteLine("            Press button 9 to delete data");
         Console.ResetColor();
 
         string? Selected_MenuNumber = Console.ReadLine();
@@ -496,7 +496,7 @@ class UserInterface
                 MainMenu(library);
                 break;
             default:
-                Console.WriteLine("Hatalı Giriş Yaptınız");
+                Console.WriteLine("The menu you are trying to access was not found!");
                 MainMenu(library);
                 break;
         }
